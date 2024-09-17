@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const { 
     getAllVideogames,
-    getVideogamesName,
     getVideogamesId,
     postVideogame
     } = require('../handlers/videogamesHandlers');
@@ -23,7 +22,7 @@ videogamesRouter.get('/:id', getVideogamesId);
 
 //GET | /videogames/name?="..."
 
-videogamesRouter.get('/?name', getVideogamesName);
+videogamesRouter.get('/?name', getAllVideogames);
 
 // POST | /videogames
 
