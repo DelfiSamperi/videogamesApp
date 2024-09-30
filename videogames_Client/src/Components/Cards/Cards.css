@@ -1,0 +1,9 @@
+.cards-cont {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100vw;
+    height: 100vh;
+    margin: 10vh;
+    justify-content: space-evenly;
+};

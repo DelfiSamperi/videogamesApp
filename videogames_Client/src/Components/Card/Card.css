@@ -1,0 +1,14 @@
+.cardContainer {
+    display: block;
+    max-width: 15rem;
+    max-height: 20rem;
+    padding: 0.5rem;
+    background-color: blueviolet;
+    border: solid 2px rgb(170, 168, 168);
+    border-radius: 10px;
+};
+
+.cardContainer:hover {
+    transform: scale(0.8);
+    box-shadow: 10px;
+};
