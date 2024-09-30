@@ -8,6 +8,7 @@ import './form.css';
 const validate = (inputs) => {
     const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/ ;
     const urlRegex = /^https?:\/\/[^\s$.?#].[^\s]*$/ ;
+    //const wwwRegex = /^www\.[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+\/?$/ ;
     var errors = {};
     
     if (!inputs.name) errors.name = 'Se requiere un nombre';
@@ -73,20 +74,14 @@ const Form = () => {
         })
     };
 
-    const disable = () => {
-        let disabled = true;
-        for(let error in errors) {
-            errors[error]==='' ?
-             disabled = false :
-             disabled = true;
-            break;
-            };
-    };
-
     //envio de formulario
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('hace como que se envió el form', inputs)
+        if(errors) {
+            console.log('Complete los campos necesarios para enviar el formulario');
+        } else {
+            console.log('hace como que se envió el form', inputs)
+        };
     };
 
     return (
@@ -143,7 +138,7 @@ const Form = () => {
                 <p className='danger'>{errors.genres}</p>
             </fieldset>
 
-            <button className="btn" type='submit' disabled={disable()} >Add videogame</button>
+            <button className="btn" type='submit'>Add videogame</button>
         </form>
     )
 };
