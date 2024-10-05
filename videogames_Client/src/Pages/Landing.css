@@ -1,0 +1,16 @@
+/*
+.landing-page {
+    background-image: 'https://media.rawg.io/media/games/199/1996ab6448cadb2ce4bea31536466333.jpg';
+    position: absolute;
+};
+*/
+
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    
+};
+
+.image-landing {
+    max-width: 90vw;
+};

@@ -1,0 +1,22 @@
+.nav-bar{
+    background-color: blueviolet;
+    width: 100%;
+    height: 10vh;
+    border: solid 2px black;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+        
+};
+
+.img-nav img{
+    width: 5.5rem;
+};
+
+/*
+.links-cont{
+    display: flex;
+    justify-content: space-between;
+}; */
