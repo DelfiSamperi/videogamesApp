@@ -3,29 +3,32 @@
 
 import React, { useState } from "react";
 import './form.css';
+import { useDispatch } from "react-redux";
+import { postVideogame } from "../Redux/actions";
 
 //verificacion errores
 const validate = (inputs) => {
-    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/ ;
-    const urlRegex = /^https?:\/\/[^\s$.?#].[^\s]*$/ ;
+    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+    const urlRegex = /^https?:\/\/[^\s$.?#].[^\s]*$/;
     //const wwwRegex = /^www\.[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+\/?$/ ;
     var errors = {};
-    
+
     if (!inputs.name) errors.name = 'Se requiere un nombre';
     if (inputs.rating < 1 && inputs.rating > 10) errors.rating = 'El puntaje debe ser entre 1 y 10';
     if (!inputs.releaseDate) errors.releaseDate = 'Se requiere una fecha de lanzamiento';
-    if(!dateRegex.test(inputs.releaseDate)) errors.releaseDate = 'El formato de fecha debe ser 00/00/0000';
-    if (!inputs.plataforms) errors.plataforms = 'Se requiere al menos una plataforma';
+    if (!dateRegex.test(inputs.releaseDate)) errors.releaseDate = 'El formato de fecha debe ser 00/00/0000';
+    if (!inputs.platforms) errors.platforms = 'Se requiere al menos una plataforma';
     if (!inputs.description) errors.description = 'Se requiere una descripcion';
-    if(inputs.description.length > 200) errors.description = 'La descripcion no puede superar los 200 caracteres';
-    if (!inputs.imagen) errors.imagen = 'Se requiere una imagen';
-    if(!urlRegex.test(inputs.image)) errors.image = 'La url de la imagen no es válida';
-    if (!inputs.generos) errors.generos = 'Se requiere al menos un genero';
+    if (inputs.description.length > 200) errors.description = 'La descripcion no puede superar los 200 caracteres';
+    if (!inputs.image) errors.image = 'Se requiere una imagen';
+    if (!urlRegex.test(inputs.image)) errors.image = 'La url de la imagen no es válida';
+    if (!inputs.genres) errors.genres = 'Se requiere al menos un genero';
 
     return errors;
 };
 
 const Form = () => {
+    const dispatch = useDispatch();
     //estado para almacenar valores
     const [inputs, setInputs] = useState({
         name: '',
@@ -36,6 +39,7 @@ const Form = () => {
         platforms: [],
         genres: [],
     });
+
 
     //verificacion de errores
     const [errors, setErrors] = useState({});
@@ -53,7 +57,7 @@ const Form = () => {
         setErrors(
             validate({
                 ...inputs,
-                [event.target.name] : event.target.value,
+                [event.target.name]: event.target.value,
             })
         )
     };
@@ -61,13 +65,13 @@ const Form = () => {
     //manejo seleccion multiple (platforms, genres)
     //NO ANDA BIEN
     const handleSelect = (event) => {
-        const {name, options} = event.target;
+        const { name, options } = event.target;
         const selectedOptions = Array.from(options)
             .filter(option => option.selected)
             .map(option => option.value);
 
         console.log(selectedOptions);
-        
+
         setInputs({
             ...inputs,
             [name]: selectedOptions,
@@ -77,10 +81,11 @@ const Form = () => {
     //envio de formulario
     const handleSubmit = (event) => {
         event.preventDefault();
-        if(errors) {
-            console.log('Complete los campos necesarios para enviar el formulario');
+        if (!errors.length) {
+            console.log('mandando los inputs', inputs)
+            postVideogame(inputs);
         } else {
-            console.log('hace como que se envió el form', inputs)
+            console.log('hay errores', errors);
         };
     };
 
@@ -89,7 +94,7 @@ const Form = () => {
             <h3>Add a new Videogame:</h3>
             <fieldset>
                 <label>Enter Videogame Name:
-                    <input className={'warning' && errors.name} onChange={handleChange} value={inputs.name} name="name" type="text" placeholder='your new videogame'/>
+                    <input className={'warning' && errors.name} onChange={handleChange} value={inputs.name} name="name" type="text" placeholder='your new videogame' />
                 </label>
                 <p className="danger">{errors.name}</p>
                 <label> Date of release:
