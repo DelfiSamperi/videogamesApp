@@ -2,17 +2,19 @@ import React from "react";
 import Card from "../Card/Card.jsx";
 import './Cards.css';
 
-const Cards = () => {
+const Cards = ({videogames}) => {
     return (
         <div className="cards-cont">
-            <Card 
-                name={"Untitled Goose Game"}
-                image={"https://media.rawg.io/media/screenshots/d91/d914d9fcb4e243eeb80fd742a5a1bee5.jpg"}
-                releaseDate= {"2019-09-20"} 
-                rating={"4.04"}></Card>
-            <Card name={"The Legend of Zelda: Link's Awakening (2019)"} releaseDate={"2019-09-20"} rating={'4.34'} ></Card>
-            <Card name={"Rebound Dodgeball Evolved"} releaseDate={"2019-09-20"} rating={'0.0'} ></Card>
-            <Card name={"2048 Battles"} releaseDate={"2019-09-20"} rating={'0.0'} ></Card>
+            
+            {videogames.map((game) =>
+                <Card 
+                    name={game.name}
+                    image={game.image}
+                    releaseDate= {game.releaseDate} 
+                    rating={game.rating} >
+                </Card>
+            )}
+            
         </div>
     )
 };

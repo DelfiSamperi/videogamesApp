@@ -83,7 +83,7 @@ const Form = () => {
         event.preventDefault();
         if (!errors.length) {
             console.log('mandando los inputs', inputs)
-            postVideogame(inputs);
+            dispatch(postVideogame(inputs));
         } else {
             console.log('hay errores', errors);
         };

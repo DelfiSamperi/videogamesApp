@@ -10,10 +10,13 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
+        
         case GET_VIDEOGAMES:
-        console.log(action.payload);
-        break;
-
+            return {
+                ...state,
+                allVideogames: action.payload,
+            };
+        
         case POST_VIDEOGAME:
             return {
                 ...state,
@@ -21,8 +24,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         default:
-        console.log('esta es la salida default del reducer');
-        break;
+            return state;
     };
 };
 

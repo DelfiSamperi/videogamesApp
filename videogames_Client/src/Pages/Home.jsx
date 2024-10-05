@@ -16,15 +16,26 @@
 // -  Paginado: el listado de videojuegos se hará por partes. Tu SPA debe contar con un 
 // paginado que muestre un total de 15 videojuegos por página.
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Cards from "../Components/Cards/Cards";
+import { getVideogames } from "../Redux/actions";
 
 const Home = () => {
+    const dispatch = useDispatch();
+
+    const allVideogames = useSelector((state) => state.allVideogames);
+    useEffect(()=>{
+        dispatch(getVideogames());        
+    }, []);
+    
     return (
+
         <div className="home-container">
-            < Cards />
+            {console.log(allVideogames)}
+            < Cards videogames={allVideogames} />
         </div>
-    )
+    );
 };
 
 export default Home;
