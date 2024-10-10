@@ -1,2 +1,5 @@
 export const POST_VIDEOGAME = 'POST_VIDEOGAME';
 export const GET_VIDEOGAMES = 'GET_VIDEOGAMES';
+export const FILTER_VIDEOGAME = 'FILTER_VIDEOGAME';
+export const ORDER_VIDEOGAME = 'ORDER_VIDEOGAME';
+export const GET_ID = 'GET_ID';

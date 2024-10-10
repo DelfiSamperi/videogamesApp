@@ -12,3 +12,8 @@
     transform: scale(0.8);
     box-shadow: 10px;
 };
+
+.card-image {
+    max-width: 10rem;
+    max-height: 15rem;
+}

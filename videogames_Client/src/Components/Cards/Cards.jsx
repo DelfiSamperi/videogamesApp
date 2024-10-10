@@ -5,16 +5,15 @@ import './Cards.css';
 const Cards = ({videogames}) => {
     return (
         <div className="cards-cont">
-            
-            {videogames.map((game) =>
+            {videogames?.map((game) =>
                 <Card 
                     name={game.name}
+                    key={game.id}
+                    id={game.id}
                     image={game.image}
-                    releaseDate= {game.releaseDate} 
-                    rating={game.rating} >
-                </Card>
+                    genres={game.genres}
+                />
             )}
-            
         </div>
     )
 };
