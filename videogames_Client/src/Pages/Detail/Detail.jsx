@@ -12,7 +12,7 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogameById } from "../Redux/actions";
+import { getVideogameById } from "../../Redux/actions";
 import './detail.css';
 
 const Detail = () => {
@@ -35,10 +35,12 @@ const Detail = () => {
                 <h3>Rated {videogameById.rating} </h3>
                 
                 <h3>Platforms:</h3>
-                <p>{videogameById.platforms.join(' | ')}</p>
+                <p>{/*videogameById.platforms.join(' | ')*/}</p> 
+                <p>{videogameById.platforms}</p>
                 
                 <h3>Genres:</h3>
-                <p>{videogameById.genres.join(' | ')}</p>
+                <p>{/*videogameById.genres.join(' | ')*/}</p>
+                <p>{videogameById.genres}</p>
                 <h5>ID: {videogameById.id}</h5>
                 <div className='description-div'>
                     <h4>{videogameById.description}</h4>

@@ -1,0 +1,13 @@
+.detail-card {
+    background-color: blueviolet;
+    margin: 15%;
+    max-width: 80vw;
+    max-height: 80vh;
+    padding: auto;
+    display: block;
+
+};
+
+.description-div{
+    margin: 5%;
+}
