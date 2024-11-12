@@ -24,4 +24,4 @@ Genres.belongsToMany(Videogames, {through: 'Videogames_Genres', timestamps: fals
 module.exports = {
     ...sequelize.models,
     conn: sequelize,
-}
+};

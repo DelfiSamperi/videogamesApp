@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
-const SearchBar = () => {
-    
-    const handleSearch = (event) => {
+const SearchBar = ({ onSearch }) => {
+     
+    const [ name, setName ] = useState('');
+
+    const handleChange = (event) => {
         event.preventDefault();
-        console.log('aca te haria la busqueda');
+        const { value } = event.target;
+        //setName(value);
+        console.log('name: ', name);
+        setName({
+            ...name, 
+            value,
+            //[event.target.name]: event.target.value,
+        })
     };
 
     return (
-        <div>
+        <div className="search-container">
             <h3>Este es el searchbar</h3>
             <label>
-                <input name='search' type="text" placeholder='Tu busqueda...' />
-                <button onClick={handleSearch} >Search</button>
+                <input name='search' type="search" id='search' onChange={handleChange} placeholder='Tu busqueda...' />
+                <button onClick={()=> {onSearch(name), setName('')}} >Search</button>
             </label>
         </div>
     )

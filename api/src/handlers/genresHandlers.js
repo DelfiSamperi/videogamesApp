@@ -1,4 +1,4 @@
-const { getGenrestoDB} = require('../controllers/genresControllers');
+const { getGenrestoDB } = require('../controllers/genresControllers');
 
 const getGenres = async (req,res) => {
     try {
@@ -9,4 +9,4 @@ const getGenres = async (req,res) => {
     }
 };
 
-module.exports = { getGenres} ;
+module.exports = { getGenres } ;

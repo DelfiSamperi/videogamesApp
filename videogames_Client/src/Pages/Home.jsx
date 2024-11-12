@@ -11,99 +11,131 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../Components/Cards/Cards";
-import { filterVideogames, getVideogames } from "../Redux/actions";
 import SearchBar from "../Components/SearchBar";
+import { 
+    filterVideogames,
+    getGenres,
+    getVideogameName,
+    getVideogames,
+    paginate,
+    orderVideogames
+} from "../Redux/actions";
 
 const Home = () => {
     const dispatch = useDispatch();
-    const allVideogames = useSelector((state) => state.allVideogames);
+
+    //const allGenres = useSelector((state)=> state.allGenres);
+    //const allVideogames = useSelector((state) => state.allVideogames);
+    const auxVideogames = useSelector((state) => state.auxVideogames);
     const filter = useSelector((state) => state.filter);
-    const filteredVideogames = useSelector((state) => state.filteredVideogames);
+    //const filteredVideogames = useSelector((state) => state.filteredVideogames);
+    //const auxFilteredVideogames = useSelector((state) => state.auxFilteredVideogames);
+    //const videogameByName = useSelector((state) => state.videogameByName);
     const ITEMS_PER_PAGE = 8;
-
+    const page = useSelector((state) => state.currentPage);
+    
+    //segun chatgpt:
+    const videogames = useSelector((state)=> (filter ? state.auxFilteredVideogames : state.auxVideogames));
+    //const currentVideogames = videogames.slice(0, ITEMS_PER_PAGE);
+    const orderedVideogames = useSelector((state) => (state.orderedVideogames));
     //PAGINADO
-    const [currentPage, setCurrentPage] = useState(1);
+    //const [currentPage, setCurrentPage] = useState(0);
     //trabaja con el estado allVideogames
-    const [item, setItem] = useState([...allVideogames].splice(0, ITEMS_PER_PAGE));
+    //const [item, setItem] = useState([...allVideogames].splice(0, ITEMS_PER_PAGE));
     //el estado filteredVideogames
-    const [filteredItems, setFilteredItems] = useState([...filteredVideogames].splice(0, ITEMS_PER_PAGE));
-
+    //const [filteredItems, setFilteredItems] = useState([...filteredVideogames].splice(0, ITEMS_PER_PAGE));
+        
     useEffect(() => {
         dispatch(getVideogames());
-        console.log('total of videogames: ', allVideogames.length);
-        console.log(allVideogames);
-        console.log(currentPage);
+        dispatch(getGenres());
+        console.log('aca se monta el componente');
+        console.log('you are in page: ', page);
+    }, []);
+    /*
+    useEffect(() => {
+        console.log('se modificó el componente');
+        //setItem([...allVideogames].splice(0, ITEMS_PER_PAGE));
+        //setFilteredItems([...filteredVideogames].splice(0, ITEMS_PER_PAGE));
+    }, [allVideogames, filteredVideogames]);
+    */
+    useEffect(()=> {
+        //el desmonte siempre en un return
+        return ()=> {
+            console.log('se desmonto el componente');
+        };
     }, []);
 
-    useEffect(() => {
-        setItem([...allVideogames].splice(0, ITEMS_PER_PAGE));
-        setFilteredItems([...filteredVideogames].splice(0, ITEMS_PER_PAGE));
-    }, [allVideogames, filteredVideogames]);
-
     const nextPage = () => {
+        dispatch(paginate('next'));
+        /*
         const next = currentPage + 1;
         const firstIndex = (currentPage * ITEMS_PER_PAGE);
         if (filter) {
-            //recontra andando!!!
-            while (firstIndex < filteredVideogames.length) {
+            if (firstIndex < filteredVideogames.length) {
                 setCurrentPage(next);
                 setFilteredItems([...filteredVideogames].splice(firstIndex, ITEMS_PER_PAGE));
                 console.log('dentro del filter, page : ', next);
                 console.log(firstIndex);
-                break;
             };
         } else {
-            // este anda bien
-            while (firstIndex < allVideogames.length) {
+            if (firstIndex < allVideogames.length) {
                 setCurrentPage(next);
                 setItem([...allVideogames].splice(firstIndex, ITEMS_PER_PAGE));
                 console.log('fuera del filter, page : ', next);
                 console.log(firstIndex);
-                break;
             };
-        };
+        }; */
     };
 
     const prevPage = () => {
+        dispatch(paginate('prev'));
+        /*
         const prev = currentPage - 1;
         const firstIndex = (prev - 1) * ITEMS_PER_PAGE;
         if (filter) {
-            //ahora siiii  !!!
-            while (firstIndex >= 0) {
+            if (firstIndex >= 0) {
                 setCurrentPage(prev);
                 setFilteredItems([...filteredVideogames].splice(firstIndex, ITEMS_PER_PAGE));
                 console.log('dentro del filter, page : ', prev);
                 console.log(firstIndex);
-                break; //sin el break se pone infinito, buscar mejores opciones
             };
         } else {
-            //RECONTRA ANDANDO!!!!!
-            while (firstIndex >= 0) {
+            if (firstIndex >= 0) {
                 setCurrentPage(prev);
                 setItem([...allVideogames].splice(firstIndex, ITEMS_PER_PAGE));
                 console.log('fuera del filter, page : ', prev);
                 console.log(firstIndex);
-                break;
             };
-        };
+        }; */
     };
 
     const filtered = () => {
         dispatch(filterVideogames('o'));
-        setCurrentPage(1);
-        console.log('page ', currentPage, ' filter: ', filter);
-        console.log('total filtered: ', filteredVideogames.length);
-        console.log(filteredVideogames);
+    };
+
+    const orderAsc = () => {
+        dispatch(orderVideogames('AZ'));
+    };
+
+    const orderDesc = () => {
+        dispatch(orderVideogames('ZA'));
+    };
+
+    const onSearch = (name) => {
+        console.log('aca se hace la busqueda por nombre');
+        dispatch(getVideogameName(name));
     };
 
     return (
         <div className="home-container">
-            < SearchBar />
-            <button onClick={prevPage}>Prev</button>
-            <button>{currentPage}</button>
-            <button onClick={nextPage}>Next</button>
+            < SearchBar onSearch={onSearch} />
+            <button name='prev' onClick={prevPage} disabled={page === 1}>Prev</button>
+            <button disabled>{page}</button>
+            <button name='next' onClick={nextPage}>Next</button>
+            <button name='AZ' onClick={orderAsc}>A-Z</button>
+            <button name='ZA' onClick={orderDesc}>Z-A</button>
             <button onClick={filtered}>Filtrar " O "</button>
-            <Cards videogames={filter ? filteredItems : item} />
+            <Cards videogames={videogames} />
         </div>
     )
 };

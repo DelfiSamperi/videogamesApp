@@ -28,5 +28,4 @@ app.use((req,res,next) => {
 //rutas que debe usar app
 app.use(mainRouter);
 
-
 module.exports = app;

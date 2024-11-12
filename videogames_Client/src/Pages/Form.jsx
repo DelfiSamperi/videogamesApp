@@ -1,10 +1,10 @@
 // Este formulario debe ser **controlado completamente con JavaScritp**. No se pueden 
 // utilizar validaciones HTML, ni utilizar librerías especiales para esto.
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './form.css';
-import { useDispatch } from "react-redux";
-import { postVideogame } from "../Redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getGenres, postVideogame } from "../Redux/actions";
 
 //verificacion errores
 const validate = (inputs) => {
@@ -22,13 +22,21 @@ const validate = (inputs) => {
     if (inputs.description.length > 200) errors.description = 'La descripcion no puede superar los 200 caracteres';
     if (!inputs.image) errors.image = 'Se requiere una imagen';
     if (!urlRegex.test(inputs.image)) errors.image = 'La url de la imagen no es válida';
-    if (!inputs.genres) errors.genres = 'Se requiere al menos un genero';
+    //if (!inputs.genres) errors.genres = 'Se requiere al menos un genero';
 
     return errors;
 };
 
 const Form = () => {
     const dispatch = useDispatch();
+    
+    useEffect(()=> {
+        dispatch(getGenres());
+        console.log(allGenres)
+    }, []);
+
+    const allGenres = useSelector((state)=> state.allGenres);
+
     //estado para almacenar valores
     const [inputs, setInputs] = useState({
         name: '',
@@ -40,20 +48,29 @@ const Form = () => {
         genres: [],
     });
 
-
     //verificacion de errores
     const [errors, setErrors] = useState({});
 
     //hardcodeo, revisar
-    const availablePlatforms = ["PC", "PlayStation", "Xbox", "Nintendo Switch"];
+    const availablePlatforms = ["PC", "PlayStation", "Xbox", "Nintendo Switch", "MacOs", "Android"];
     const availableGenres = ["Acción", "Aventura", "RPG", "Deportes"];
 
     //manejo cambio de inputs
     const handleChange = (event) => {
-        setInputs({
-            ...inputs,
-            [event.target.name]: event.target.value,
-        })
+        if(event.target.name === 'platforms' || event.target.name === 'genres') {
+            if(inputs.platforms.includes(event.target.value)) return;
+            if(inputs.genres.includes(event.target.value)) return;
+            setInputs({
+                ...inputs,
+                [event.target.name]: [...inputs[event.target.name], event.target.value] 
+            })
+        } else {
+            setInputs({
+                ...inputs,
+                [event.target.name]: event.target.value,
+            })
+        };
+        
         setErrors(
             validate({
                 ...inputs,
@@ -62,20 +79,16 @@ const Form = () => {
         )
     };
 
-    //manejo seleccion multiple (platforms, genres)
-    //NO ANDA BIEN
-    const handleSelect = (event) => {
-        const { name, options } = event.target;
-        const selectedOptions = Array.from(options)
-            .filter(option => option.selected)
-            .map(option => option.value);
-
-        console.log(selectedOptions);
-
-        setInputs({
-            ...inputs,
-            [name]: selectedOptions,
-        })
+    const disable = () => {
+        let auxDisabled = true;
+        for (let error in errors){
+            if(errors[error]==='') auxDisabled = false;
+            else {
+                auxDisabled = true;
+                break;
+            };
+        };
+        return auxDisabled;
     };
 
     //envio de formulario
@@ -121,7 +134,7 @@ const Form = () => {
 
             <fieldset>
                 <label> Choose a platform:
-                    <select className={'warning' && errors.platforms} onChange={handleSelect} multiple value={inputs.platforms} name='platforms'>
+                    <select className={'warning' && errors.platforms} onChange={handleChange} multiple value={inputs.platforms} name='platforms'>
                         {availablePlatforms.map((platform, index) => (
                             <option key={index} value={platform} >
                                 {platform}
@@ -130,9 +143,12 @@ const Form = () => {
                     </select>
                 </label>
                 <p className='danger'>{errors.platforms}</p>
+                <div className="form-labels">
+                    {inputs.platforms.join(' | ')}
+                </div>
 
                 <label> Choose genres:
-                    <select className={'warning' && errors.genres} onChange={handleSelect} multiple value={inputs.genres} name='genres' >
+                    <select className={'warning' && errors.genres} onChange={handleChange} multiple value={inputs.genres} name='genres' >
                         {availableGenres.map((genre, index) => (
                             <option key={index} value={genre} >
                                 {genre}
@@ -141,9 +157,13 @@ const Form = () => {
                     </select>
                 </label>
                 <p className='danger'>{errors.genres}</p>
+                <div className="form-labels" >
+                    {inputs.genres.join(' | ')}
+                </div>
             </fieldset>
 
-            <button className="btn" type='submit'>Add videogame</button>
+            {/* <input disabled={disable()} type="submit"/> */ }
+             <button className="btn" type='submit'>Add videogame</button>
         </form>
     )
 };

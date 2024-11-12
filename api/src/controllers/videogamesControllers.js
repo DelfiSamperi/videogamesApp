@@ -3,8 +3,8 @@ const { Videogames, Genres } = require('../db');
 //const { Op } = require('sequelize');
 const axios = require('axios');
 
-const { API_KEY } = process.env;
-const API_URL = 'https://api.rawg.io/api/games';
+const { API_KEY, API_URL} = process.env;
+//const API_URL = 'https://api.rawg.io/api/games';
 
 // GET VIDEOGAMES
 const getVideogamesApi = async () => {

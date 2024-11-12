@@ -19,5 +19,8 @@ module.exports = (sequelize) => {
             autoIncrement: true,
             allowNull: false,
         }, 
-    }, { freezeTableName: true, timestamps: false })
+    }, { 
+        freezeTableName: true,
+        timestamps: false 
+    });
 };

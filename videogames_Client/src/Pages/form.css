@@ -43,3 +43,9 @@ input, textarea, select {
 .danger {
     color: red !important;
 };
+
+.form-labels {
+    background-color: #0cf;
+    padding: 5px;
+    margin: 5px;
+};
