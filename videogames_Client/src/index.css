@@ -14,7 +14,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 a {
   font-weight: 500;
   color: black;
@@ -24,7 +23,6 @@ a {
 a:hover {
   color: rgb(21, 5, 235);
 }
-
 
 body {
   margin: 0;

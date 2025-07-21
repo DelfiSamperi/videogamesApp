@@ -10,8 +10,8 @@
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Cards from "../Components/Cards/Cards";
-import SearchBar from "../Components/SearchBar";
+import Cards from "../../Components/Cards/Cards";
+import SearchBar from "../../Components/SearchBar";
 import { 
     filterVideogames,
     getGenres,
@@ -19,7 +19,7 @@ import {
     getVideogames,
     paginate,
     orderVideogames
-} from "../Redux/actions";
+} from "../../Redux/actions";
 
 const Home = () => {
     const dispatch = useDispatch();

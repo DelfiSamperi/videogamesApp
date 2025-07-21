@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import './form.css';
 import { useDispatch, useSelector } from "react-redux";
-import { getGenres, postVideogame } from "../Redux/actions";
+import { getGenres, postVideogame } from "../../Redux/actions";
 
 //verificacion errores
 const validate = (inputs) => {

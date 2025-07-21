@@ -2,10 +2,10 @@ import './App.css';
 import React from 'react';
 import { Routes, Route, useLocation } from "react-router-dom";
 //import { useLocation } from 'react-router-dom';
-import Home from './Pages/Home';
-import Landing from './Pages/Landing';
-import Detail from './Pages/Detail';
-import Form from './Pages/Form';
+import Home from './Pages/Home/Home';
+import Landing from './Pages/Landing/Landing';
+import Detail from './Pages/Detail/Detail';
+import Form from './Pages/Form/Form';
 import NotFound from './Pages/NotFound';
 import NavBar from './Components/NavBar/NavBar';
 

@@ -1,6 +1,6 @@
 # videogamesApp
 
-In this app you can store new videogames in a database, search for videogames from api, save your favorites on order them.
+In this app you can store new videogames in a database, search for videogames from api, save your favorites or order them.
 
 ## Technologies used for development
 

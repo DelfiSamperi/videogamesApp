@@ -11,6 +11,15 @@
     
 };
 
-.image-landing {
-    max-width: 90vw;
+img{
+    max-width: 50%;
+    height: 40%;
 };
+
+/*
+.image-landing {
+    max-width: 70vw;
+};
+*/
+
+
