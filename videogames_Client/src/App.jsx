@@ -6,7 +6,7 @@ import Home from './Pages/Home/Home';
 import Landing from './Pages/Landing/Landing';
 import Detail from './Pages/Detail/Detail';
 import Form from './Pages/Form/Form';
-import NotFound from './Pages/NotFound';
+import NotFound from './Pages/notFound/NotFound';
 import NavBar from './Components/NavBar/NavBar';
 
 function App() {

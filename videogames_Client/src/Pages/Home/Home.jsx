@@ -11,7 +11,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../../Components/Cards/Cards";
-import SearchBar from "../../Components/SearchBar";
+import SearchBar from "../../Components/SearchBar/SearchBar";
+import './home.css';
 import { 
     filterVideogames,
     getGenres,
@@ -129,13 +130,16 @@ const Home = () => {
     return (
         <div className="home-container">
             < SearchBar onSearch={onSearch} />
-            <button name='prev' onClick={prevPage} disabled={page === 1}>Prev</button>
-            <button disabled>{page}</button>
-            <button name='next' onClick={nextPage}>Next</button>
-            <button name='AZ' onClick={orderAsc}>A-Z</button>
-            <button name='ZA' onClick={orderDesc}>Z-A</button>
-            <button onClick={filtered}>Filtrar " O "</button>
+            <div className="pagination">
+                <button name='prev' onClick={prevPage} disabled={page === 1}>Prev</button>
+                <button disabled>{page}</button>
+                <button name='next' onClick={nextPage}>Next</button>
+                <button name='AZ' onClick={orderAsc}>A-Z</button>
+                <button name='ZA' onClick={orderDesc}>Z-A</button>
+                <button onClick={filtered}>Filtrar " O "</button>
+            </div>
             <Cards videogames={videogames} />
+            
         </div>
     )
 };

@@ -1,9 +1,12 @@
 .cards-cont {
     display: flex;
+    position: center;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-between;
     width: 100vw;
-    height: 100vh;
-    margin: 10vh;
-    justify-content: space-evenly;
+    padding: 2em;
+    background-color: bisque;
 };
+
