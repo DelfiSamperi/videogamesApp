@@ -11,7 +11,10 @@ const Landing = () => {
     return (
         <div className="landing-page">
             <h2>Welcome to Videogames App...</h2>
-            <img className='image-landing' src='https://media.rawg.io/media/games/199/1996ab6448cadb2ce4bea31536466333.jpg' alt='landing page image' />
+            <img className='image-landing' 
+            height='400em' width='600em' 
+            src='https://media.rawg.io/media/games/199/1996ab6448cadb2ce4bea31536466333.jpg'
+            alt='landing page image' />
             <Link to='/home'>
             <button className="btn"> Entrar </button>
             </Link>

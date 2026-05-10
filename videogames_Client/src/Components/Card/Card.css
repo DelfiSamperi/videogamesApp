@@ -1,25 +1,20 @@
 .cardContainer {
     display: block;
-    width: 12em;
-    /*
+    width: 15em;
+    height: 20em;
+    /* 
     max-width: 15em;
     min-width: 10em;
  */
-    max-height: auto;
     padding: 0.5em;
     margin: 1em;
-    background-color: blueviolet;
-    border: solid 2px rgb(170, 168, 168);
+    background-color: var(--card-color);
+    /*border: solid 2px rgb(170, 168, 168);*/
     border-radius: 10px;
 };
 
 /* esto no funciona */
-.cardContainer:hover {
-    transform: scale(0.8);
+.linkDetail:hover {
+    text-transform: scale(0.8);
     box-shadow: 10px;
 };
-
-.card-image {
-    width: 1px;
-    height: 3px;
-}

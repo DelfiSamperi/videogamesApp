@@ -1,5 +1,5 @@
 .detail-card {
-    background-color: blueviolet;
+    background-color: var(--card-color);
     margin: 15%;
     max-width: 80vw;
     max-height: 80vh;
