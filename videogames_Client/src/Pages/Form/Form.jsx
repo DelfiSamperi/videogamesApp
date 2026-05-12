@@ -14,7 +14,7 @@ const validate = (inputs) => {
     var errors = {};
 
     if (!inputs.name) errors.name = 'Se requiere un nombre';
-    if (inputs.rating < 1 && inputs.rating > 10) errors.rating = 'El puntaje debe ser entre 1 y 10';
+    if (inputs.rating < 1 || inputs.rating > 10) errors.rating = 'El puntaje debe ser entre 1 y 10';
     if (!inputs.releaseDate) errors.releaseDate = 'Se requiere una fecha de lanzamiento';
     if (!dateRegex.test(inputs.releaseDate)) errors.releaseDate = 'El formato de fecha debe ser 00/00/0000';
     if (!inputs.platforms) errors.platforms = 'Se requiere al menos una plataforma';
@@ -32,11 +32,11 @@ const Form = () => {
     
     useEffect(()=> {
         dispatch(getGenres());
-        console.log(allGenres)
+        console.log(allGenres);
     }, []);
 
     const allGenres = useSelector((state)=> state.allGenres);
-
+    console.log(allGenres);
     //estado para almacenar valores
     const [inputs, setInputs] = useState({
         name: '',
@@ -94,7 +94,8 @@ const Form = () => {
     //envio de formulario
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (!errors.length) {
+        //if (!errors.length) {
+        if(Object.keys(errors).length === 0) {  //segun chatgpt 
             console.log('mandando los inputs', inputs)
             dispatch(postVideogame(inputs));
         } else {
@@ -148,10 +149,10 @@ const Form = () => {
                 </div>
 
                 <label> Choose genres:
-                    <select className={'warning' && errors.genres} onChange={handleChange} multiple value={inputs.genres} name='genres' >
-                        {availableGenres.map((genre, index) => (
-                            <option key={index} value={genre} >
-                                {genre}
+                    <select className={'warning' && errors.genres} onChange={handleChange} value={inputs.genres} name='genres' >
+                        {allGenres.map((genre, index) => (
+                            <option key={genre.id} value={genre.name} >
+                                {genre.name}
                             </option>
                         ))}
                     </select>

@@ -33,6 +33,7 @@ const getGenrestoDB = async () => {
             console.log(genres.dataValues);
         });
         console.log('La base de datos de generos ya estaba cargada (al poner {alter:true} en index.js la funcion getGenresToDB entra en el else!!');
+        return genresDB;
     };
 };
 
