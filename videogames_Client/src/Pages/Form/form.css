@@ -45,7 +45,29 @@ input, textarea, select {
 };
 
 .form-labels {
-    background-color: #0cf;
-    padding: 5px;
-    margin: 5px;
-};
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+/*
+.tag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #2d2d2d;
+    color:white;
+    padding: 6px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+*/
+.tag button {
+    background: none;
+    border: none;
+    color: #ff6b6b;
+    cursor: pointer;
+    font-size: 14px;
+}
+    

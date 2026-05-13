@@ -12,7 +12,7 @@ const NavBar = () => {
             <div className='links-cont'>
                 <Link to='/home'>Home</Link>
                 <Link to='/form'>Create</Link>
-                <Link to='/home'>Profile??</Link>
+               { /* <Link to='/home'>Profile??</Link> */ }
             </div>
         </nav>
     )

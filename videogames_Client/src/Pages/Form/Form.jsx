@@ -57,20 +57,22 @@ const Form = () => {
 
     //manejo cambio de inputs
     const handleChange = (event) => {
-        if(event.target.name === 'platforms' || event.target.name === 'genres') {
-            if(inputs.platforms.includes(event.target.value)) return;
-            if(inputs.genres.includes(event.target.value)) return;
+        const {name, value} = event.target;
+
+        if(name === 'platforms' || name === 'genres') {
+            if(inputs[name].includes(value)) return;
+            
             setInputs({
                 ...inputs,
-                [event.target.name]: [...inputs[event.target.name], event.target.value] 
-            })
-        } else {
-            setInputs({
-                ...inputs,
-                [event.target.name]: event.target.value,
-            })
-        };
-        
+                [name]: [...inputs[name], value] 
+            });
+            return;
+        } 
+        setInputs({
+            ...inputs,
+            [name]: value,
+        });
+                
         setErrors(
             validate({
                 ...inputs,
@@ -101,6 +103,16 @@ const Form = () => {
         } else {
             console.log('hay errores', errors);
         };
+    };
+
+    //remover tarjetas de plaaforma y genero
+    const handleRemove = (type,value) => {
+        setInputs({
+            ...inputs,
+            [type]: inputs[type].filter(
+                (item) => item !== value
+            ),
+        });
     };
 
     return (
@@ -135,7 +147,10 @@ const Form = () => {
 
             <fieldset>
                 <label> Choose a platform:
-                    <select className={'warning' && errors.platforms} onChange={handleChange} multiple value={inputs.platforms} name='platforms'>
+                    <select className={'warning' && errors.platforms} onChange={handleChange} defaultValue="" name='platforms'>
+                        <option value="" disabled>
+                            Select platform
+                        </option>
                         {availablePlatforms.map((platform, index) => (
                             <option key={index} value={platform} >
                                 {platform}
@@ -145,11 +160,22 @@ const Form = () => {
                 </label>
                 <p className='danger'>{errors.platforms}</p>
                 <div className="form-labels">
-                    {inputs.platforms.join(' | ')}
+                    {/*inputs.platforms.join(' | ')*/}
+                    {inputs.platforms.map((platform) => (
+                        <span className="tag" key={platform}>
+                            {platform}
+                            <button type='button' onClick={() => handleRemove('platforms', platform)} >
+                                X
+                            </button>
+                        </span>
+                    ))}
                 </div>
 
                 <label> Choose genres:
-                    <select className={'warning' && errors.genres} onChange={handleChange} value={inputs.genres} name='genres' >
+                    <select className={'warning' && errors.genres} onChange={handleChange} defaultValue="" name='genres' >
+                        <option value="" disabled>
+                            Select genre
+                        </option>
                         {allGenres.map((genre, index) => (
                             <option key={genre.id} value={genre.name} >
                                 {genre.name}
@@ -159,7 +185,15 @@ const Form = () => {
                 </label>
                 <p className='danger'>{errors.genres}</p>
                 <div className="form-labels" >
-                    {inputs.genres.join(' | ')}
+                    {/*inputs.genres.join(' | ')*/}
+                    {inputs.genres.map((genre) => (
+                        <span className="tag" key={genre}>
+                            {genre}
+                            <button type='button' onClick={() => handleRemove('genres', genre)} >
+                                X
+                            </button>
+                        </span>
+                    ))}
                 </div>
             </fieldset>
 
