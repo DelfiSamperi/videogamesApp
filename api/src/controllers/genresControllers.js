@@ -14,8 +14,11 @@ desde allí.
 */
 
 const getGenrestoDB = async () => {
-    const genresDB = await Genres.findAll();
+    
+    let genresDB = await Genres.findAll();
+
     if(!genresDB.length) {
+        
         const genresFromApi = (await axios.get(API_GENRES)).data;
         
         const genresApi = genresFromApi.results.map(
@@ -23,20 +26,20 @@ const getGenrestoDB = async () => {
                 name: g.name,
             })
         );
+
         await Genres.bulkCreate(genresApi);
-        const genresDB = await Genres.findAll();
+        
+        genresDB = await Genres.findAll();
         
         console.log('base de datos con genres ya creados');
-        return genresDB;
-    } else {
-        genresDB.forEach( genres => {
-            console.log(genres.dataValues);
-        });
-        console.log('La base de datos de generos ya estaba cargada (al poner {alter:true} en index.js la funcion getGenresToDB entra en el else!!');
-        return genresDB;
-    };
+    
+    } 
+  
+    console.log('La base de datos de generos ya estaba cargada (al poner {alter:true} en index.js la funcion getGenresToDB no entra al bucle');
+    return genresDB;
+
 };
 
 module.exports = {
     getGenrestoDB
-}
+};
