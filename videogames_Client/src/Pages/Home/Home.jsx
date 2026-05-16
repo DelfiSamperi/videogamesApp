@@ -129,15 +129,33 @@ const Home = () => {
 
     return (
         <div className="home-container">
+
             < SearchBar onSearch={onSearch} />
-            <div className="pagination">
-                <button name='prev' onClick={prevPage} disabled={page === 1}>Prev</button>
-                <button disabled>{page}</button>
-                <button name='next' onClick={nextPage}>Next</button>
-                <button name='AZ' onClick={orderAsc}>A-Z</button>
-                <button name='ZA' onClick={orderDesc}>Z-A</button>
-                <button onClick={filtered}>Filtrar " O "</button>
-            </div>
+            
+            <section className="controls-container" >
+
+                <div className="pagination-container">
+                
+                    <button name='prev' onClick={prevPage} disabled={page === 1}>Prev</button>
+                
+                    <span className="page-number">{page}</span>
+                
+                    <button name='next' onClick={nextPage}>Next</button>
+            
+                </div>
+                
+                <div className="filters-container">
+
+                    <button name='AZ' onClick={orderAsc}>A-Z</button>
+            
+                    <button name='ZA' onClick={orderDesc}>Z-A</button>
+            
+                    <button onClick={filtered}>Filtrar " O "</button>
+            
+                </div>
+            
+            </section>
+
             <Cards videogames={videogames} />
             
         </div>

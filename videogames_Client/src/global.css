@@ -1,0 +1,67 @@
+:root {
+  --background-color: #242424 ;
+  --text-color: #ffffff;
+  --card-color: #8a2be2;
+  --link-color: #1e90ff;
+  --hover-color: #ff6347;
+  --button-bg-color: #1a1a1a;
+  --button-hover-bg-color: #dcccff;
+  
+  font-family: Inter, system-ui, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* RESET */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY */
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  
+  background-color: var(--background-color);
+  color: var(--text-color);
+
+  overflow-x: hidden;
+
+}
+
+/* LINKS */
+
+a { 
+  text-decoration: none;
+  color: inherit;
+}
+
+/* BUTTONS */
+button {
+  border: none;
+  border-radius: 8px;
+
+  padding: 0.6rem 1rem;
+
+  font-size: 1rem;
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+}
+
+button:hover {
+  transform: scale(1.03);
+}  

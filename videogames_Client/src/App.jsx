@@ -13,7 +13,7 @@ function App() {
   const location = useLocation();
 
   return (
-    <>
+    <div className='app-container'>
       {location.pathname !== '/' && <NavBar />}
 
       <Routes>
@@ -24,7 +24,7 @@ function App() {
         <Route path='*' element={<NotFound />} />
       </Routes>
 
-    </>
+    </div>
   )
 };
 

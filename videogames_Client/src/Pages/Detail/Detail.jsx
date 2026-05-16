@@ -27,30 +27,57 @@ const Detail = () => {
     console.log('id en Detail: ', useParams());
         
     return (
-        <div>
+
+       <div className="detail-container">
+            
             <div className="detail-card">
-                <h2>{videogameById.name}</h2>
-                
-                <h3>Released {videogameById.releaseDate}</h3>
-                <h3>Rated {videogameById.rating} </h3>
-                
-                <h3>Platforms:</h3>
-                <p>{/*videogameById.platforms.join(' | ')*/}</p> 
-                <p>{videogameById.platforms}</p>
-                
-                <h3>Genres:</h3>
-                <p>{/*videogameById.genres.join(' | ')*/}</p>
-                <p>{videogameById.genres}</p>
-                <h5>ID: {videogameById.id}</h5>
-                <div className='description-div'>
-                    <h4>{videogameById.description}</h4>
+                <div className="detail-header">
+
+                    <h1>{videogameById.name}</h1>
+                    <Link to='/home'>
+                        <button className="back-button">Back Home</button>
+                    </Link>
                 </div>
             </div>
-            <Link to='/home'>
-                <button>Back Home</button>
-            </Link>
-        </div>
+            <img 
+                className='videogame-image' 
+                /*width='210em' height='auto'*/ 
+                src={videogameById.image} 
+                alt={videogameById.name}
+            />
+            <div className="detail-info">
+                 <p>
+                    <span>Released: {videogameById.releaseDate}</span>
+                </p>
+                <p>
+                    <span>Rating: {videogameById.rating} </span>
+                </p>
+                
+                <p>
+                    <span>Platforms: </span> 
+                    {Array.isArray(videogameById.platforms) ? videogameById.platforms.join(' | ') : videogameById.platforms}
+                     
+                </p>
+                
+                <p>
+                    <span>Genres: </span>
+                    {/* esto de abajo es parche, hay que arreglarlo para que siempre llegue un array*/}
+                    {Array.isArray(videogameById.genres) ? videogameById.genres.join(' | ') : videogameById.genres}
+                </p>
+                
+                <p>
+                    <span>ID: </span> {videogameById.id}
+                </p>
+            </div>
+            <div className='description-container'>
+                <h3>Description</h3>
+                <p>
+                    {videogameById.description}
+                </p>
+            </div>
+       </div>
     )
-};
+
+}
 
 export default Detail;
